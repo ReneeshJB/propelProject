@@ -1,1 +1,74 @@
-<p>enquiry works!</p>
+<div class="container">
+    <br>
+    <div class="border">
+        <div class="input-group">
+            <div>
+                <button class="btn btn-outline-primary" (click)="newEnquiry(content)"><i class="fa fa-user"></i> New
+                    Enquiry</button>
+            </div>
+            <!-- <div>
+                <select #selectName name="firstName" id="firstName" class="form-control"
+                    (change)="searchByName(selectName.value)">
+                    <option selected disabled>Select Firstname</option>
+                    <option value="0">All</option>
+                    <option *ngFor="let enq of allEmployees" value="{{emp.firstName}}">{{emp.firstName}}</option>
+                </select>
+            </div> -->
+        </div>
+    </div>
+    <br>
+    <div>
+        <table class="table table-bordered table-striped">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Email</th>
+                    <th>Highest Qualification</th>
+                    <th>Date of Enquiry</th>
+                    <th>Enquired Courses</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let enq of enquiries | paginate:{itemsPerPage:4, currentPage:page}; let i = index">
+
+                    <td>{{enq.enquiryId}}</td>
+                    <td>{{enq.name}}</td>
+                    <td>{{enq.dob}}</td>
+                    <td>{{enq.email}}</td>
+                    <td>{{enq.highestQual}}</td>
+                    <td>{{enq.enqDate}}</td>
+                    <td>
+                        <p *ngFor="let course of enq.enquiredCourses">{{course.courseName}}</p>
+                    </td>
+                    <td>{{enq.status.statusName}}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm"><i class="fa fa-search"></i> Search</button>
+                        <button class="btn btn-warning btn-sm" (click)="updateEnquiry(contentEdit,enq)"><i
+                                class="fa fa-edit"></i>
+                            Edit</button>
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-remove"></i> Delete</button>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="border">
+            <pagination-controls (pageChange)="page = ($event)"></pagination-controls>
+        </div>
+    </div>
+
+    <!-- Add Form -->
+    <ng-template #content let-modal>
+
+    </ng-template>
+
+    <!-- Edit Form -->
+    <ng-template #contentEdit let-modal>
+
+    </ng-template>

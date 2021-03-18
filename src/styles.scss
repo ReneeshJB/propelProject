@@ -2,3 +2,9 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import '~font-awesome/scss/font-awesome';
+@import'~bootstrap/dist/css/bootstrap.css';
+
+.container{
+    margin-top: 50px;
+}
