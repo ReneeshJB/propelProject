@@ -11,5 +11,5 @@ export class Enquiry {
     public enqDate!: Date;
 
     public status!: Status;
-    public enquiredCourses !: Course[]
+    public enquiredCourses !: Course[];
 }

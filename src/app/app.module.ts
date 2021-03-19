@@ -9,12 +9,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoordinatorComponent } from './coordinator/coordinator.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    EnquiryComponent
+    EnquiryComponent,
+    CoordinatorComponent
   ],
   imports: [
     BrowserModule,

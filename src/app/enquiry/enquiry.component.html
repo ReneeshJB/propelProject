@@ -43,7 +43,8 @@
                     <td>{{enq.highestQual}}</td>
                     <td>{{enq.enqDate}}</td>
                     <td>
-                        <p *ngFor="let course of enq.enquiredCourses">{{course.courseName}}</p>
+                        <span *ngFor="let course of enq.enquiredCourses;let i=index">{{course.courseName}} <span
+                                *ngIf="i < enq.enquiredCourses.length-1">,</span> </span>
                     </td>
                     <td>{{enq.status.statusName}}</td>
                     <td>
@@ -65,7 +66,57 @@
 
     <!-- Add Form -->
     <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">New Enquiry</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="addForm" autocomplete=off>
 
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <div class="input-group">
+                        <input formControlName="name" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">DOB</label>
+                    <div class="input-group">
+                        <input formControlName="dob" type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <input formControlName="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="highestQual">Highest Qualification</label>
+                    <div class="input-group">
+                        <input formControlName="highestQual" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status">Highest Qualification</label>
+
+                    <select name="status" id="status" class="form-control">
+                        <option selected disabled>Select Status</option>
+                        <option *ngFor="let status of statuses" value="{{status.statusId}}">{{status.statusName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="border text-center">
+                    <button data-dismiss="modal" class="btn btn-info" (click)='onSubmit()'>Submit</button>
+                </div>
+            </form>
+
+
+        </div>
     </ng-template>
 
     <!-- Edit Form -->
