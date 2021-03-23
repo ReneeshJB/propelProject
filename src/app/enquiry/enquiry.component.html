@@ -73,12 +73,21 @@
             </button>
         </div>
         <div class="modal-body">
-            <form [formGroup]="addForm" autocomplete=off>
+            <form [formGroup]="addForm" autocomplete=off (ngSubmit)='onSubmit()'>
 
                 <div class="form-group">
                     <label for="name">Name</label>
                     <div class="input-group">
                         <input formControlName="name" class="form-control" required>
+                        <!-- <span class="text-danger"
+                            *ngIf="(isSubmitted || formControls.name.touched) && formControls.name.errors">Name
+                            is required</span> -->
+                    </div>
+                </div>
+                <div *ngIf="(isSubmitted || formControls.name.touched) && formControls.name.errors">
+
+                    <div *ngIf="formControls.name.errors?.required" style="color: red; text-align: left;">
+                        Name is required
                     </div>
                 </div>
 
@@ -86,6 +95,11 @@
                     <label for="dob">DOB</label>
                     <div class="input-group">
                         <input formControlName="dob" type="date" class="form-control">
+                    </div>
+                </div>
+                <div *ngIf="isSubmitted && formControls.dob.errors">
+                    <div *ngIf="formControls.dob.errors.required" style="color: red; text-align: left;">
+                        <sup>*</sup> DOB is required
                     </div>
                 </div>
 
@@ -102,7 +116,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="status">Highest Qualification</label>
+                    <label>Enquired Course</label>
+                    <div *ngFor="let course of courses" class="input-group">
+                        <label>
+                            <input type="checkbox" [value]="course.courseId" (change)="onCheckChange($event)"
+                                formControlName="enquiredCourses">
+                            {{course.courseName}}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
 
                     <select name="status" id="status" class="form-control">
                         <option selected disabled>Select Status</option>
@@ -111,7 +135,7 @@
                     </select>
                 </div>
                 <div class="border text-center">
-                    <button data-dismiss="modal" class="btn btn-info" (click)='onSubmit()'>Submit</button>
+                    <button class="btn btn-info">Submit</button>
                 </div>
             </form>
 
@@ -121,5 +145,79 @@
 
     <!-- Edit Form -->
     <ng-template #contentEdit let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">New Enquiry</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="addForm" autocomplete=off (ngSubmit)='onSubmit()'>
 
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <div class="input-group">
+                        <input formControlName="name" class="form-control" required>
+                        <!-- <span class="text-danger"
+                            *ngIf="(isSubmitted || formControls.name.touched) && formControls.name.errors">Name
+                            is required</span> -->
+                    </div>
+                </div>
+                <div *ngIf="(isSubmitted || formControls.name.touched) && formControls.name.errors">
+
+                    <div *ngIf="formControls.name.errors?.required" style="color: red; text-align: left;">
+                        Name is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">DOB</label>
+                    <div class="input-group">
+                        <input formControlName="dob" type="date" class="form-control">
+                    </div>
+                </div>
+                <div *ngIf="isSubmitted && formControls.dob.errors">
+                    <div *ngIf="formControls.dob.errors.required" style="color: red; text-align: left;">
+                        <sup>*</sup> DOB is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <input formControlName="email" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="highestQual">Highest Qualification</label>
+                    <div class="input-group">
+                        <input formControlName="highestQual" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Enquired Course</label>
+                    <div *ngFor="let course of courses" class="input-group">
+                        <label>
+                            <input type="checkbox" [value]="course.courseId" (change)="onCheckChange($event)"
+                                formControlName="enquiredCourses">
+                            {{course.courseName}}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+
+                    <select name="status" id="status" class="form-control">
+                        <option selected disabled>Select Status</option>
+                        <option *ngFor="let status of statuses" value="{{status.statusId}}">{{status.statusName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="border text-center">
+                    <button class="btn btn-info">Submit</button>
+                </div>
+            </form>
+
+
+        </div>
     </ng-template>

@@ -24,6 +24,7 @@
     "angular-material": "^1.2.2",
     "bootstrap": "^4.6.0",
     "font-awesome": "^4.7.0",
+    "ng-multiselect-dropdown": "^0.3.4",
     "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",

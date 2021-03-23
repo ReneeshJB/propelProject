@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Course } from './course';
 import { Enquiry } from './enquiry';
 
 @Injectable({
@@ -19,7 +20,11 @@ export class EnquiryService {
   }
 
 
-  updateEnquiry(enq: Enquiry): Observable<any> {
+  insertEnquiry(enq: Enquiry): Observable<any> {
     return this.httpclient.put(environment.apiUrl + "/api/employees", enq);
+  }
+
+  getAllCourses():Observable<Course[]>{
+    return this.httpclient.get<Course[]>(environment.apiUrl + "api/courses");
   }
 }
